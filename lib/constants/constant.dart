@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 export 'routegenerator.dart';
 
-const Color primaryColor = Color(0xFFF67952);
-const Color bgColor = Color(0xFFFBFBFD);
+const Color kprimaryColor = Color(0xFFF67952);
+const Color kbgColor = Color(0xFFFBFBFD);
 
-const double defaultPadding = 16.0;
-const double defaultBorderRadius = 12.0;
+const double kdefaultPadding = 16.0;
+const double kdefaultBorderRadius = 12.0;
 
 //ecommerceserver
 const kStatusOk = 200;

@@ -14,7 +14,7 @@ Future postUser(String url, {Map? body}) async {
         if (statusCode != kStatusOk) {
           throw Exception("Error while fetching data");
         }
-        return Welcome.fromJson(json.decode(response.body));
+        return UserData.fromJson(json.decode(response.body));
       },
     );
   } catch (e) {

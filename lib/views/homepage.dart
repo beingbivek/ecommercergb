@@ -17,16 +17,22 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         actions: const [],
         title: Row(
-          children: [
+          children: const [
             Icon(
               Icons.location_on,
               color: Colors.black,
             ),
-            Text("ok"),
+            Text(
+              "ok",
+              style: TextStyle(color: Colors.black),
+            ),
           ],
         ),
         leading: IconButton(
-          icon: const Icon(Icons.menu),
+          icon: const Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
           // icon: SvgPicture.asset("assets\icons\menu.svg"),
           onPressed: () {
             Navigator.of(context).popAndPushNamed('/');

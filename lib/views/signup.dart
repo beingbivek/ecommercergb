@@ -1,8 +1,6 @@
-import 'package:ecommercergb/constants/constant.dart';
-import 'package:ecommercergb/modals/user.dart';
-import 'package:ecommercergb/modals/userdata.dart';
-import 'package:ecommercergb/service/server.dart';
 import 'package:flutter/material.dart';
+
+import '../service/service.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -76,21 +74,13 @@ class SignupPage extends StatelessWidget {
                     ),
                     MaterialButton(
                       onPressed: () async {
-                        try {
-                          LoginUser newUser = LoginUser(
-                              name: nameController.text,
-                              email: emailController.text,
-                              password: passController.text,
-                              passwordconfirmation: passconController.text);
-                          Welcome p = await (postUser(
-                            ecommerceApi + "registration",
-                            body: newUser.toMap(),
-                          ));
-                          Navigator.of(context)
-                              .pushNamed('/home', arguments: p);
-                        } catch (e) {
-                          print(e);
-                        }
+                        var p = loginUser(
+                            nameController.text,
+                            emailController.text,
+                            passController.text,
+                            passconController.text,
+                            "registration");
+                        Navigator.of(context).pushNamed('/home', arguments: p);
                       },
                       color: Colors.amber,
                       child: const Text('SignUp'),
