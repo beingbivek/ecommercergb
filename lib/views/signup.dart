@@ -1,6 +1,5 @@
+import 'package:ecommercergb/components/component.dart';
 import 'package:flutter/material.dart';
-
-import '../service/service.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -41,50 +40,36 @@ class SignupPage extends StatelessWidget {
                 key: formkey,
                 child: Column(
                   children: [
-                    TextFormField(
-                      controller: nameController,
-                      decoration: const InputDecoration(labelText: 'Name'),
-                      // validator: (value) {
-                      // user = value;
-                      // },
-                    ),
-                    TextFormField(
-                      controller: emailController,
-                      decoration: const InputDecoration(labelText: 'Email'),
-                      // validator: (value) {
-                      //   user = value;
-                      // },
-                    ),
-                    TextFormField(
-                      controller: passController,
-                      decoration: const InputDecoration(labelText: 'Password'),
-                      obscureText: true,
-                      // validator: (value) {
-                      //   user = value;
-                      // },
-                    ),
-                    TextFormField(
-                      controller: passconController,
-                      decoration: const InputDecoration(
-                          labelText: 'Confirmation Password'),
-                      obscureText: true,
-                    ),
+                    TextFieldDesign(
+                        hint: "Name",
+                        controller: nameController,
+                        isNormal: true,
+                        isName: true),
+                    TextFieldDesign(
+                        hint: "Email",
+                        controller: emailController,
+                        isNormal: true,
+                        isName: false),
+                    TextFieldDesign(
+                        hint: "Password",
+                        controller: passController,
+                        isNormal: false,
+                        isName: false),
+                    TextFieldDesign(
+                        hint: "Confirmation Password",
+                        controller: passconController,
+                        isNormal: false,
+                        isName: false),
                     const SizedBox(
                       height: 50,
                     ),
-                    MaterialButton(
-                      onPressed: () async {
-                        var p = loginUser(
-                            nameController.text,
-                            emailController.text,
-                            passController.text,
-                            passconController.text,
-                            "registration");
-                        Navigator.of(context).pushNamed('/home', arguments: p);
-                      },
-                      color: Colors.amber,
-                      child: const Text('SignUp'),
-                    ),
+                    LoginButton(
+                        nameController: nameController,
+                        emailController: emailController,
+                        passController: passController,
+                        passconController: passconController,
+                        path: "registration",
+                        name: "Sign up"),
                     const SizedBox(
                       height: 50,
                     ),
@@ -93,8 +78,7 @@ class SignupPage extends StatelessWidget {
                         const Text("Already had account?"),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed('/', arguments: null);
+                            Navigator.of(context).popAndPushNamed('/');
                           },
                           child: const Text('Login'),
                         )

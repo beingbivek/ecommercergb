@@ -1,7 +1,7 @@
 import 'package:ecommercergb/constants/constant.dart';
-import 'package:ecommercergb/service/service.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../components/component.dart';
 
 class LoginPage extends StatefulWidget {
   final Future? post;
@@ -14,14 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  @override
-  void dispose() {
-    LoginPage.userController.dispose();
-    LoginPage.passController.dispose();
-    super.dispose();
-  }
-
-  bool _hidePass = true;
   @override
   Widget build(BuildContext context) {
     final _formkey = GlobalKey<FormState>();
@@ -56,71 +48,20 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formkey,
                 child: Column(
                   children: [
-                    TextFormField(
+                    TextFieldDesign(
+                      isNormal: true,
+                      hint: "Email",
                       controller: LoginPage.userController,
-                      decoration: const InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                            width: 2.0,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: kprimaryColor,
-                            width: 2.0,
-                          ),
-                        ),
-                        hintText: 'Email',
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: kprimaryColor,
-                        ),
-                      ),
-                      // validator: (value) {},
-                      onChanged: (value) {},
+                      isName: false,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    TextFormField(
+                    TextFieldDesign(
+                      hint: "Password",
+                      isName: false,
                       controller: LoginPage.passController,
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _hidePass = !_hidePass;
-                            });
-                          },
-                          icon: Icon(
-                            _hidePass ? Icons.visibility_off : Icons.visibility,
-                            color: kprimaryColor,
-                          ),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                            width: 2.0,
-                          ),
-                        ),
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: kprimaryColor,
-                            width: 2.0,
-                          ),
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.lock,
-                          color: kprimaryColor,
-                        ),
-                        hintText: "Password",
-                      ),
-                      obscureText: _hidePass,
-                      onChanged: (value) {},
+                      isNormal: false,
                     ),
                     const SizedBox(
                       height: 50,
@@ -139,8 +80,13 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     LoginButton(
-                        userController: LoginPage.userController,
-                        passController: LoginPage.passController),
+                        nameController: TextEditingController.fromValue(null),
+                        emailController: LoginPage.userController,
+                        passController: LoginPage.passController,
+                        passconController:
+                            TextEditingController.fromValue(null),
+                        path: "login",
+                        name: "Log in"),
                     const SizedBox(
                       height: 100,
                       child: Divider(
@@ -204,36 +150,6 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  const LoginButton({
-    Key? key,
-    required this.userController,
-    required this.passController,
-  }) : super(key: key);
-
-  final TextEditingController userController;
-  final TextEditingController passController;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      onPressed: () async {
-        var p = loginUser(
-            "", userController.text, passController.text, "", "login");
-        Navigator.of(context).pushNamed('/home', arguments: p);
-      },
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 60),
-      color: kprimaryColor,
-      child: const Text(
-        'Log in',
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
       ),
     );
   }
