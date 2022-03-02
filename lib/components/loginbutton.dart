@@ -28,9 +28,15 @@ class LoginButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       onPressed: () async {
         try {
-          var p = loginUser(nameController.text, emailController.text,
+          var p = await loginUser(nameController.text, emailController.text,
               passController.text, passconController.text, path);
-          Navigator.of(context).popAndPushNamed('/home', arguments: p);
+          if (p.toString().isEmpty) {
+            const AlertDialog(
+              title: Text("Credentials doesn't match"),
+            );
+          } else {
+            Navigator.of(context).popAndPushNamed('/home', arguments: p);
+          }
         } catch (e) {
           print(e);
         }

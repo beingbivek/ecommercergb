@@ -20,8 +20,12 @@ Future<dynamic> loginUser(String name, String email, String password,
     username = p.user.name;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(p.token.toString());
-    await prefs.setString('token', p.token.toString());
-    return p;
+    if (p.token.toString().isEmpty) {
+      return null;
+    } else {
+      await prefs.setString('token', p.token.toString());
+      return p;
+    }
   } catch (e) {
     print(e);
   }
