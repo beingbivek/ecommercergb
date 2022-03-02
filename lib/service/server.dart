@@ -1,5 +1,5 @@
 import 'package:ecommercergb/constants/constant.dart';
-import 'package:ecommercergb/modals/userdata.dart';
+import 'package:ecommercergb/models/model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

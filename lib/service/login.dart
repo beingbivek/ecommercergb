@@ -2,7 +2,7 @@ import 'package:ecommercergb/service/service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/constant.dart';
-import '../modals/modal.dart';
+import '../models/model.dart';
 
 String? username;
 Future<dynamic> loginUser(String name, String email, String password,
