@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/constant.dart';
 import '../models/model.dart';
 
-String? username;
+// String? username;
 Future<dynamic> loginUser(String name, String email, String password,
     String passcon, String addtoAPI) async {
   try {
@@ -17,11 +17,11 @@ Future<dynamic> loginUser(String name, String email, String password,
       ecommerceApi + addtoAPI,
       body: newUser.toMap(),
     ));
-    username = p.user.name;
+    // username = p.user.name;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(p.token.toString());
-    if (p.token.toString().isEmpty) {
-      return null;
+    if (p.token.length < 4) {
+      return p.token;
     } else {
       await prefs.setString('token', p.token.toString());
       return p;
@@ -29,5 +29,5 @@ Future<dynamic> loginUser(String name, String email, String password,
   } catch (e) {
     print(e);
   }
-  return username;
+  // return username;
 }

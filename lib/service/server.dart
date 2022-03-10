@@ -9,10 +9,16 @@ Future postUser(String url, {Map? body}) async {
     return http.post(Uri.parse(url), body: body).then(
       (http.Response response) {
         final int statusCode = response.statusCode;
-        print(response.body);
-        print(json.encode(response.body));
         if (statusCode != kStatusOk) {
-          throw Exception("Error while fetching data");
+          // throw Exception("Error while fetching data");
+          return UserData(
+              token: response.statusCode.toString(),
+              user: User(
+                  id: 0,
+                  name: "",
+                  email: "",
+                  createdAt: DateTime.now(),
+                  updatedAt: DateTime.now()));
         }
         return UserData.fromJson(json.decode(response.body));
       },

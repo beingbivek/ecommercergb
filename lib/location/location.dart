@@ -32,12 +32,15 @@ Future<PermissionStatus> getPermissionStatus() async {
 
 Future<dynamic> getCityName() async {
   try {
+    getPermissionStatus();
+    isServiceEnabled();
     var locator = await location.getLocation();
     NetworkHelper networkHelper = NetworkHelper(
         '$openWeatherMapURL?lat=${locator.latitude}&lon=${locator.longitude}&appid=$apiKey&units=metric');
     dynamic cityDetails = await networkHelper.getData();
     return cityDetails['name'];
   } catch (e) {
+    print("object");
     return 'No Internet and problem is ' + e.toString();
   }
 }
