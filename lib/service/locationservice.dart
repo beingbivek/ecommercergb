@@ -1,19 +1,22 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:location/location.dart';
+import 'package:ecommercergb/models/model.dart';
 
-class NetworkHelper {
-  NetworkHelper(this.url);
+class LocationService {
+  late UserLocation _currentLocation
+      // = UserLocation(
+      //         longitude: 1, latitude: 1)
+      ;
 
-  final String url;
+  Location location = Location();
 
-  Future getData() async {
-    http.Response response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      String data = response.body;
-      return jsonDecode(data);
-    } else {
-      return "No Internet Connection";
+  Future<UserLocation> getLocation() async {
+    try {
+      var userLocation = await location.getLocation();
+      _currentLocation = UserLocation(
+          longitude: userLocation.longitude, latitude: userLocation.latitude);
+    } catch (e) {
+      print("Could not get location: $e");
     }
+    return _currentLocation;
   }
 }
