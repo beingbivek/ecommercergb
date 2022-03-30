@@ -29,16 +29,17 @@ class LoginButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       onPressed: () async {
         try {
-          var p = await loginUser(nameController.text, emailController.text,
-              passController.text, passconController.text, path);
-          if (p.toString() != kStatusOk.toString()) {
-            print(p);
-          } else {
-            String city = await getCityName();
-            print(city);
-            // Navigator.of(context)
-            //     .popAndPushNamed('/home', arguments: await getCityName());
-          }
+          // var p = await loginUser(nameController.text, emailController.text,
+          //     passController.text, passconController.text, path);
+          // if (p.toString() != kStatusOk.toString()) {
+          //   print(p);
+          // } else {
+          print("object");
+          String city = await getCityName();
+          print(city);
+          // Navigator.of(context)
+          //     .popAndPushNamed('/home', arguments: await getCityName());
+          // }
         } catch (e) {
           print(e);
         }
